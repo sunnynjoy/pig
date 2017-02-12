@@ -1,6 +1,6 @@
 
 --Load nyse_daily_file through pig
-nydata = load '/data/NYSE_daily_File' as(name:chararray, symbol:chararray, date:datetime, start:float, high:float, low:float, medium:f
+nydata = load '$input' as(name:chararray, symbol:chararray, date:datetime, start:float, high:float, low:float, medium:f
 loat, val:long, sellingprice:float);
 
 --filter based on year
@@ -19,4 +19,4 @@ order_val_desc = ORDER max_val BY maxval DESC;
 limit_val = LIMIT order_val_desc 10;
 
 --store in any location
-STORE limit_val INTO 'output/pig/max_val';
+STORE limit_val INTO '$output';
